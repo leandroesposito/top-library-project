@@ -1,3 +1,5 @@
+const booksContainer = document.querySelector(".books-container");
+
 const myLibrary = [];
 
 function Book(author, title, numPages, read, id) {
@@ -71,7 +73,7 @@ function showBooks() {
 
 function showBook(book) {
     const bookElement = new BookElement(book);
-    document.body.appendChild(bookElement.createElement());
+    booksContainer.appendChild(bookElement.createElement());
 }
 
 addBookToLibrary("Marijn Haverbeke", "Eloquent JavaScript, Third Edition", 472, false);
