@@ -21,24 +21,24 @@ function BookElement(book) {
     this.book = book;
 }
 
-BookElement.prototype.createElement = function (book) {
-    const newBookElement = document.createElement(div);
+BookElement.prototype.createElement = function () {
+    const newBookElement = document.createElement("div");
     newBookElement.classList.add("card");
-    newBookElement.dataset.id = book.id;
+    newBookElement.dataset.id = this.book.id;
 
     const pAuthor = document.createElement("p");
     const pTitle = document.createElement("p");
     const pNumPages = document.createElement("p");
     const pRead = document.createElement("p");
 
-    pAuthor.textContent = `Author: ${book.author}`;
-    pTitle.textContent = `Title: ${book.title}`;
-    pNumPages.textContent = `Number of pages: ${book.numPages}`;
-    pRead.textContent = `Has been read: ${book.read ? "Yes" : "No"}`;
+    pAuthor.textContent = `Author: ${this.book.author}`;
+    pTitle.textContent = `Title: ${this.book.title}`;
+    pNumPages.textContent = `Number of pages: ${this.book.numPages}`;
+    pRead.textContent = `Has been read: ${this.book.read ? "Yes" : "No"}`;
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "X";
-    deleteButton.dataset.id = book.id;
+    deleteButton.dataset.id = this.book.id;
     deleteButton.addEventListener("click", handleDeleteBookClick);
 
     newBookElement.appendChild(deleteButton);
