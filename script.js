@@ -64,3 +64,24 @@ function deleteBook(bookId) {
         bookToDelete.remove();
     }
 }
+
+function showBooks() {
+    myLibrary.forEach(showBook);
+}
+
+function showBook(book) {
+    const bookElement = new BookElement(book);
+    document.body.appendChild(bookElement.createElement());
+}
+
+addBookToLibrary("Marijn Haverbeke", "Eloquent JavaScript, Third Edition", 472, false);
+addBookToLibrary("Nicolás Bevacqua", "Practical Modern JavaScript", 334, true);
+addBookToLibrary("Nicholas C. Zakas", "Understanding ECMAScript 6", 352, false);
+addBookToLibrary("Axel Rauschmayer", "Speaking JavaScript", 460, false);
+addBookToLibrary("Addy Osmani", "Learning JavaScript Design Patterns", 254, true);
+addBookToLibrary("Kyle Simpson", "You Don't Know JS Yet", 143, false);
+addBookToLibrary("Scott Chacon and Ben Straub", "Pro Git", 458, true);
+addBookToLibrary("Caitlin Sadowski, Thomas Zimmermann", "Rethinking Productivity in Software Engineering", 310, true);
+
+showBooks();
+
