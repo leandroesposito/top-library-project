@@ -56,11 +56,13 @@ button.new-book:active {
     gap: 1rem;
 }
 
-.card {
+.card,
+.new-book-dialog {
     position: relative;
     padding: 1rem;
     border: 2px solid var(--border-color);
     border-radius: 1rem;
+    background-color: var(--background-color);
     transition: all .3s;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, .3);
 }
@@ -69,7 +71,8 @@ button.new-book:active {
     scale: 1.1;
 }
 
-.card button {
+.card button,
+.close-dialog-button {
     position: absolute;
     right: 0;
     top: 0;
@@ -93,8 +96,80 @@ button.new-book:active {
     border-radius: .5rem;
 }
 
+.row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
 .row:not(:last-child) {
     padding-bottom: .5rem;
     margin-bottom: .5rem;
     border-bottom: 1px solid var(--border-color);
+}
+
+.new-book-dialog {
+    padding: 2rem;
+}
+
+.new-book-dialog input {
+    background-color: var(--background-color);
+    border: 2px solid var(--border-color);
+    border-radius: .5rem;
+    padding: .5rem;
+    font-size: 1rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    flex: 1
+}
+
+.new-book-dialog input[type="checkbox"] {
+    appearance: none;
+    flex: 0 0 3rem;
+    border-radius: 1rem;
+    position: relative;
+    transition: all .5s;
+}
+
+.new-book-dialog input[type="checkbox"]:checked {
+    background-color: var(--background-color);
+}
+
+.new-book-dialog input[type="checkbox"]::before {
+    position: absolute;
+    content: "";
+    width: calc(1rem - 4px);
+    height: calc(1rem - 5px);
+    background-color: var(--background-color);
+    border: 2px solid var(--border-color);
+    top: 1px;
+    left: 1px;
+    border-radius: 1rem;
+    transition: all .5s;
+}
+
+.new-book-dialog input[type="checkbox"]:checked::before {
+    left: calc(2rem - 4px);
+    background-color: var(--border-color);
+}
+
+.submit-new-book-button {
+    justify-self: center;
+    font-size: 1rem;
+    background-color: var(--border-color);
+    border: 2px solid black;
+    border-radius: .5rem;
+    color: var(--title-font-color);
+    font-weight: bold;
+    padding: .5rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .3);
+    cursor: pointer;
+    margin: auto;
+}
+
+.submit-new-book-button:hover {
+    scale: 1.1;
+}
+
+.submit-new-book-button:active {
+    scale: .9;
 }
