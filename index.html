@@ -21,6 +21,40 @@
 
             </div>
         </div>
+        <dialog class="new-book-dialog">
+            <button class="close-dialog-button">X</button>
+            <form id="new-book-form">
+                <div class="row">
+                    <label for="author" class="field-name">
+                        Author
+                    </label>
+                    <input type="text" id="author" name="author" required>
+                </div>
+                <div class="row">
+                    <label for="title" class="field-name">
+                        Title
+                    </label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="row">
+                    <label for="num-pages" class="field-name">
+                        Number of pages
+                    </label>
+                    <input type="number" min="1" max="999999" id="num-pages" name="num-pages" required>
+                </div>
+                <div class="row">
+                    <label for="read" class="field-name">
+                        Has been read
+                    </label>
+                    <input type="checkbox" id="read" name="read" required>
+                </div>
+                <div class="row">
+                    <button type="submit" class="submit-new-book-button">
+                        Add
+                    </button>
+                </div>
+            </form>
+        </dialog>
     </div>
 
     <script src="script.js"></script>
