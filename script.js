@@ -39,6 +39,7 @@ BookElement.prototype.createElement = function () {
 
         return row;
     }
+
     const newBookElement = document.createElement("div");
     newBookElement.classList.add("card");
     newBookElement.dataset.id = this.book.id;
@@ -52,7 +53,7 @@ BookElement.prototype.createElement = function () {
     newBookElement.appendChild(createRow("Author", this.book.author));
     newBookElement.appendChild(createRow("Title", this.book.title));
     newBookElement.appendChild(createRow("Number of pages", this.book.numPages));
-    newBookElement.appendChild(createRow("Has been read", this.book.read));
+    newBookElement.appendChild(createRow("Has been read", this.book.read ? "Yes" : "No"));
 
     return newBookElement;
 };
