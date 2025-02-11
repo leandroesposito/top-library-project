@@ -24,30 +24,35 @@ function BookElement(book) {
 }
 
 BookElement.prototype.createElement = function () {
+    function createRow(label, value) {
+        const row = document.createElement("div");
+        row.classList.add("row");
+
+        const fieldName = document.createElement("span");
+        fieldName.classList.add("field-name");
+        fieldName.textContent = label;
+
+        const valueText = document.createTextNode(` : ${value}`);
+
+        row.appendChild(fieldName);
+        row.appendChild(valueText);
+
+        return row;
+    }
     const newBookElement = document.createElement("div");
     newBookElement.classList.add("card");
     newBookElement.dataset.id = this.book.id;
-
-    const pAuthor = document.createElement("p");
-    const pTitle = document.createElement("p");
-    const pNumPages = document.createElement("p");
-    const pRead = document.createElement("p");
-
-    pAuthor.textContent = `Author: ${this.book.author}`;
-    pTitle.textContent = `Title: ${this.book.title}`;
-    pNumPages.textContent = `Number of pages: ${this.book.numPages}`;
-    pRead.textContent = `Has been read: ${this.book.read ? "Yes" : "No"}`;
-
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "X";
     deleteButton.dataset.id = this.book.id;
     deleteButton.addEventListener("click", handleDeleteBookClick);
 
     newBookElement.appendChild(deleteButton);
-    newBookElement.appendChild(pTitle);
-    newBookElement.appendChild(pAuthor);
-    newBookElement.appendChild(pNumPages);
-    newBookElement.appendChild(pRead);
+
+    newBookElement.appendChild(createRow("Author", this.book.author));
+    newBookElement.appendChild(createRow("Title", this.book.title));
+    newBookElement.appendChild(createRow("Number of pages", this.book.numPages));
+    newBookElement.appendChild(createRow("Has been read", this.book.read));
 
     return newBookElement;
 };
@@ -86,4 +91,3 @@ addBookToLibrary("Scott Chacon and Ben Straub", "Pro Git", 458, true);
 addBookToLibrary("Caitlin Sadowski, Thomas Zimmermann", "Rethinking Productivity in Software Engineering", 310, true);
 
 showBooks();
-
