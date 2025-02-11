@@ -1,4 +1,7 @@
 const booksContainer = document.querySelector(".books-container");
+const newBookButton = document.querySelector("button.new-book");
+const newBookDialog = document.querySelector(".new-book-dialog");
+const newBookForm = document.querySelector("#new-book-form");
 
 const myLibrary = [];
 
@@ -85,10 +88,25 @@ function showBook(book) {
 addBookToLibrary("Marijn Haverbeke", "Eloquent JavaScript, Third Edition", 472, false);
 addBookToLibrary("Nicolás Bevacqua", "Practical Modern JavaScript", 334, true);
 addBookToLibrary("Nicholas C. Zakas", "Understanding ECMAScript 6", 352, false);
-addBookToLibrary("Axel Rauschmayer", "Speaking JavaScript", 460, false);
-addBookToLibrary("Addy Osmani", "Learning JavaScript Design Patterns", 254, true);
-addBookToLibrary("Kyle Simpson", "You Don't Know JS Yet", 143, false);
-addBookToLibrary("Scott Chacon and Ben Straub", "Pro Git", 458, true);
-addBookToLibrary("Caitlin Sadowski, Thomas Zimmermann", "Rethinking Productivity in Software Engineering", 310, true);
 
-showBooks();
+newBookButton.addEventListener("click", () => {
+    newBookDialog.showModal();
+});
+
+newBookForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    console.log(event);
+
+    const formData = new FormData(newBookForm);
+
+    const author = formData.get("author");
+    const title = formData.get("title");
+    const numPages = formData.get("num-pages");
+    const read = Boolean(formData.get("read"));
+
+    const newBook = addBookToLibrary(author, title, numPages, read);
+    showBook(newBook);
+
+    newBookDialog.close();
+    newBookForm.reset();
+})
