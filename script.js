@@ -2,6 +2,7 @@ const booksContainer = document.querySelector(".books-container");
 const newBookButton = document.querySelector("button.new-book");
 const newBookDialog = document.querySelector(".new-book-dialog");
 const newBookForm = document.querySelector("#new-book-form");
+const closeDialogButton = document.querySelector(".close-dialog-button");
 
 const myLibrary = [];
 
@@ -110,3 +111,5 @@ newBookForm.addEventListener("submit", (event) => {
     newBookDialog.close();
     newBookForm.reset();
 })
+
+closeDialogButton.addEventListener("click", () => newBookDialog.close());
