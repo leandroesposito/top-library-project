@@ -69,6 +69,7 @@ button.new-book:active {
 
 .card:hover {
     scale: 1.1;
+    z-index: 1;
 }
 
 .card button,
