@@ -90,6 +90,8 @@ addBookToLibrary("Marijn Haverbeke", "Eloquent JavaScript, Third Edition", 472, 
 addBookToLibrary("Nicolás Bevacqua", "Practical Modern JavaScript", 334, true);
 addBookToLibrary("Nicholas C. Zakas", "Understanding ECMAScript 6", 352, false);
 
+showBooks();
+
 newBookButton.addEventListener("click", () => {
     newBookDialog.showModal();
 });
