@@ -33,7 +33,7 @@ body {
     min-width: 300px;
 }
 
-.new-book {
+button.new-book {
     align-self: end;
     font-size: 1.5rem;
     background-color: var(--border-color);
@@ -46,7 +46,7 @@ body {
     cursor: pointer;
 }
 
-.new-book:active {
+button.new-book:active {
     scale: .9;
 }
 
