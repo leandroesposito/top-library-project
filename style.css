@@ -109,7 +109,14 @@ button.new-book:active {
 }
 
 .new-book-dialog {
+    position: absolute;
     padding: 2rem;
+    display: block;
+    transform: scaleY(0);
+}
+
+.new-book-dialog:open {
+    transform: scaleY(1);
 }
 
 .new-book-dialog input {
