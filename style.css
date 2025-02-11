@@ -30,6 +30,7 @@ body {
     background-color: var(--background-color);
     width: 50vw;
     margin-bottom: 2rem;
+    min-width: 300px;
 }
 
 .new-book {
