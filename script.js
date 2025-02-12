@@ -5,6 +5,7 @@ const newBookForm = document.querySelector("#new-book-form");
 const closeDialogButton = document.querySelector(".close-dialog-button");
 
 const myLibrary = [];
+const booksElements = []
 
 function Book(author, title, numPages, read, id) {
     this.author = author;
@@ -25,10 +26,11 @@ function addBookToLibrary(author, title, numPages, read) {
 
 function BookElement(book) {
     this.book = book;
+    this.node = null;
 }
 
 BookElement.prototype.createElement = function () {
-    function createRow(label, value) {
+    function createRow(label, value, className) {
         const row = document.createElement("div");
         row.classList.add("row");
 
@@ -36,7 +38,9 @@ BookElement.prototype.createElement = function () {
         fieldName.classList.add("field-name");
         fieldName.textContent = label;
 
-        const valueText = document.createTextNode(` : ${value}`);
+        const valueText = document.createElement("span");
+        valueText.textContent = ` : ${value}`;
+        valueText.classList.add(className);
 
         row.appendChild(fieldName);
         row.appendChild(valueText);
@@ -44,22 +48,43 @@ BookElement.prototype.createElement = function () {
         return row;
     }
 
+    function createButton(text, className, id, callback) {
+        const button = document.createElement("button");
+        button.textContent = text;
+        button.classList.add(className);
+        button.dataset.id = id;
+        button.addEventListener("click", callback);
+
+        return button;
+    }
+
     const newBookElement = document.createElement("div");
     newBookElement.classList.add("card");
     newBookElement.dataset.id = this.book.id;
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "X";
-    deleteButton.dataset.id = this.book.id;
-    deleteButton.addEventListener("click", handleDeleteBookClick);
+
+    const deleteButton = createButton("X", "close-card-button", this.book.id, handleDeleteBookClick);
+    const toggleReadButton = createButton("Toggle read status", "toggle-read-button", this.book.id, handleToggleReadClick);
 
     newBookElement.appendChild(deleteButton);
 
-    newBookElement.appendChild(createRow("Author", this.book.author));
-    newBookElement.appendChild(createRow("Title", this.book.title));
-    newBookElement.appendChild(createRow("Number of pages", this.book.numPages));
-    newBookElement.appendChild(createRow("Has been read", this.book.read ? "Yes" : "No"));
+    newBookElement.appendChild(createRow("Author", this.book.author), "author");
+    newBookElement.appendChild(createRow("Title", this.book.title), "title");
+    newBookElement.appendChild(createRow("Number of pages", this.book.numPages), "num-pages");
 
-    return newBookElement;
+    const readRow = createRow("Has been read", this.book.read ? "Yes" : "No", "read");
+    readRow.appendChild(toggleReadButton);
+
+    newBookElement.appendChild(readRow);
+
+    this.node = newBookElement
+
+    return this.node;
+};
+
+BookElement.prototype.toggleReadStatus = function () {
+    this.book.read = !this.book.read;
+    const readValueSpan = this.node.querySelector(".read");
+    readValueSpan.textContent = ` : ${this.book.read ? "Yes" : "No"}`;
 };
 
 function handleDeleteBookClick(event) {
@@ -67,6 +92,17 @@ function handleDeleteBookClick(event) {
 
     const bookId = target.dataset.id;
     deleteBook(bookId);
+}
+
+function handleToggleReadClick(event) {
+    target = event.target;
+
+    const bookId = target.dataset.id;
+    toggleBookReadStatus(bookId);
+}
+
+function toggleBookReadStatus(bookId) {
+    booksElements[bookId].toggleReadStatus();
 }
 
 function deleteBook(bookId) {
@@ -83,6 +119,7 @@ function showBooks() {
 
 function showBook(book) {
     const bookElement = new BookElement(book);
+    booksElements.push(bookElement);
     booksContainer.appendChild(bookElement.createElement());
 }
 

@@ -72,7 +72,7 @@ button.new-book:active {
     z-index: 1;
 }
 
-.card button,
+.close-card-button,
 .close-dialog-button {
     position: absolute;
     right: 0;
@@ -86,15 +86,27 @@ button.new-book:active {
     transition: all .3s;
 }
 
-.card:has(button:hover) {
+.card:has(.close-card-button:hover) {
     background-color: var(--background-color-delete);
 }
 
-.field-name {
+.field-name,
+.toggle-read-button {
     padding: .5rem;
     background-color: var(--border-color);
     display: inline-block;
     border-radius: .5rem;
+}
+
+.toggle-read-button {
+    cursor: pointer;
+    box-shadow: 5px 5px;
+    border: none;
+}
+
+.toggle-read-button:active {
+    translate: 5px 5px;
+    box-shadow: none;
 }
 
 .row {
