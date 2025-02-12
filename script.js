@@ -135,7 +135,6 @@ newBookButton.addEventListener("click", () => {
 
 newBookForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    console.log(event);
 
     const formData = new FormData(newBookForm);
 
