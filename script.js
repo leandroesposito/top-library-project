@@ -3,6 +3,10 @@ const newBookButton = document.querySelector("button.new-book");
 const newBookDialog = document.querySelector(".new-book-dialog");
 const newBookForm = document.querySelector("#new-book-form");
 const closeDialogButton = document.querySelector(".close-dialog-button");
+const authorInput = document.querySelector("#author");
+const titleInput = document.querySelector("#title");
+const numPagesInput = document.querySelector("#num-pages");
+const readInput = document.querySelector("#read");
 
 const myLibrary = [];
 const booksElements = [];
@@ -184,3 +188,38 @@ newBookForm.addEventListener("submit", (event) => {
 });
 
 closeDialogButton.addEventListener("click", () => newBookDialog.close());
+
+function validateInput(inputField, message, customValidation) {
+  inputField.setCustomValidity("");
+  if (inputField.validity.valueMissing) {
+    inputField.setCustomValidity(`${message} must be provided`);
+  } else if (customValidation) {
+    customValidation(inputField);
+  }
+}
+
+function validateNumPages(inputField) {
+  if (inputField.validity.rangeUnderflow) {
+    inputField.setCustomValidity("Number of pages must be greater than 0");
+  } else if (inputField.validity.rangeOverflow) {
+    inputField.setCustomValidity("Number of pages must be less than 999999");
+  }
+}
+
+function reportValidity(inputField) {
+  inputField.reportValidity();
+}
+
+function setupValidation(inputField, message, customValidation = null) {
+  inputField.addEventListener("input", () =>
+    validateInput(inputField, message, customValidation)
+  );
+  inputField.addEventListener("focusin", () =>
+    validateInput(inputField, message, customValidation)
+  );
+  inputField.addEventListener("focusout", () => reportValidity(inputField));
+}
+
+setupValidation(authorInput, "Author name");
+setupValidation(titleInput, "Title");
+setupValidation(numPagesInput, "Number of pages", validateNumPages);
